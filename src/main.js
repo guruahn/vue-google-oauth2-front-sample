@@ -5,7 +5,7 @@ import installElement from './plugins/element/installElement.js'
 
 Vue.config.productionTip = false
 Vue.use(installElement)
-Vue.use(GAuth, {clientId: '768834812579-rq7d2r3ne7am7imjnajenu670ounoi01.apps.googleusercontent.com', scope: 'profile email'})
+Vue.use(GAuth, {clientId: '768834812579-rq7d2r3ne7am7imjnajenu670ounoi01.apps.googleusercontent.com', scope: 'profile email', prompt: 'select_account'})
 
 new Vue({
   render: h => h(App),

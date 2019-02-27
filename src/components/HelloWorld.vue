@@ -5,6 +5,8 @@
       <el-button type="primary" icon="fas fa-edit" @click="handleClickSignIn" v-if="!isSignIn" :disabled="!isInit">sign in</el-button>
       <el-button type="primary" icon="fas fa-edit" @click="handleClickSignOut" v-if="isSignIn" :disabled="!isInit">sign out</el-button>
       <i class="fas fa-edit"></i>
+      <p>isInit: {{isInit}}</p>
+      <p>isSignIn: {{isSignIn}}</p>
     </el-row>
   </div>
 </template>
