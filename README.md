@@ -1,5 +1,5 @@
 # vue-google-oauth2-front-sample
-
+> Sample project for [vue-google-oauth2](https://github.com/guruahn/vue-google-oauth2) plugin.
 ## Project setup
 
 ### 1. install
