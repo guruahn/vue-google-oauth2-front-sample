@@ -1,8 +1,14 @@
 # vue-google-oauth2-front-sample
 
 ## Project setup
+
+### 1. install
 ```
 yarn install
+```
+### 2. set your google clientId in main.js
+```javascript
+Vue.use(GAuth, { clientId: '394838939483-rq7d2rfj39gkdfjd9jenu670ounoi01.apps.googleusercontent.com', scope: 'email', prompt: 'select_account', fetch_basic_profile: false })
 ```
 
 ### Compiles and hot-reloads for development
