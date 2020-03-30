@@ -21,6 +21,12 @@
         v-if="isSignIn"
         :disabled="!isInit"
       >sign out</el-button>
+      <el-button
+        type="primary"
+        icon="fas fa-edit"
+        @click="handleClickDisconnect"
+        :disabled="!isInit"
+      >disconnect</el-button>
       <i class="fas fa-edit"></i>
       <p>isInit: {{isInit}}</p>
       <p>isSignIn: {{isSignIn}}</p>
@@ -80,10 +86,15 @@ export default {
         .then(() => {
           //on success do something
           this.isSignIn = this.$gAuth.isAuthorized;
+          console.log("isSignIn", this.$gAuth.isAuthorized);
         })
         .catch(error => {
           //on fail do something
         });
+    },
+
+    handleClickDisconnect() {
+      window.location.href = `https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=${window.location.href}`;
     }
   },
 

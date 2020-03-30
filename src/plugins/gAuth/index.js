@@ -126,7 +126,7 @@ function installGoogleAuthPlugin(Vue, options) {
   /* eslint-disable */
   //set config
   let GoogleAuthConfig = null
-  let GoogleAuthDefaultConfig = { scope: 'profile email', discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'] }
+  let GoogleAuthDefaultConfig = { scope: 'profile email', discoveryDocs: ['https://people.googleapis.com/$discovery/rest'] }
   let prompt = 'select_account'
   if (typeof options === 'object') {
     GoogleAuthConfig = Object.assign(GoogleAuthDefaultConfig, options)
