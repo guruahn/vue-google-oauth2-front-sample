@@ -1,8 +1,8 @@
 import '@babel/polyfill'
 import Vue from 'vue'
 import App from './App.vue'
-//import GAuth from 'vue-google-oauth2'
-import GAuth from './plugins/gAuth'
+import GAuth from 'vue-google-oauth2'
+//import GAuth from './plugins/gAuth'
 import installElement from './plugins/element/installElement.js'
 
 Vue.config.productionTip = false
