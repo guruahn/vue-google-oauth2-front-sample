@@ -57,6 +57,7 @@ export default {
         })
         .catch(error => {
           //on fail do something
+          console.error(error);
         });
     },
 
@@ -77,6 +78,7 @@ export default {
         })
         .catch(error => {
           //on fail do something
+          console.error(error);
         });
     },
 
@@ -90,6 +92,7 @@ export default {
         })
         .catch(error => {
           //on fail do something
+          console.error(error);
         });
     },
 

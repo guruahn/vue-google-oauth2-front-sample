@@ -18,12 +18,13 @@ var googleAuth = (function () {
   }
 
   function initClient(config) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       window.gapi.load('auth2', () => {
-        console.log('config', config)
         window.gapi.auth2.init(config)
           .then(() => {
             resolve(window.gapi)
+          }).catch((error) => {
+            reject(error)
           })
       })
     })
@@ -53,6 +54,8 @@ var googleAuth = (function () {
           this.isInit = true
           this.prompt = prompt
           this.isAuthorized = this.GoogleAuth.isSignedIn.get()
+        }).catch((error) => {
+          console.error(error)
         })
     };
 
@@ -126,7 +129,7 @@ function installGoogleAuthPlugin(Vue, options) {
   /* eslint-disable */
   //set config
   let GoogleAuthConfig = null
-  let GoogleAuthDefaultConfig = { scope: 'profile email', discoveryDocs: ['https://people.googleapis.com/$discovery/rest'] }
+  let GoogleAuthDefaultConfig = { scope: 'profile email', discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'] }
   let prompt = 'select_account'
   if (typeof options === 'object') {
     GoogleAuthConfig = Object.assign(GoogleAuthDefaultConfig, options)
@@ -135,7 +138,6 @@ function installGoogleAuthPlugin(Vue, options) {
     if (!options.clientId) {
       console.warn('clientId is required')
     }
-    console.log('GoogleAuthConfig', GoogleAuthConfig)
   } else {
     console.warn('invalid option type. Object type accepted only')
   }
