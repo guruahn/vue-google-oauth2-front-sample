@@ -57,7 +57,7 @@ export default {
   methods: {
     async handleClickUpdateScope() {
       const option = new window.gapi.auth2.SigninOptionsBuilder();
-      option.setScope("email https://www.googleapis.com/auth/drive");
+      option.setScope("email https://www.googleapis.com/auth/drive.file");
       const googleUser = this.$gAuth.GoogleAuth.currentUser.get();
       try {
         await googleUser.grant(option);
