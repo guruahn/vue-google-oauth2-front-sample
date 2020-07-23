@@ -30,6 +30,13 @@
       <i class="fas fa-edit"></i>
       <p>isInit: {{isInit}}</p>
       <p>isSignIn: {{isSignIn}}</p>
+
+      <el-button
+        type="primary"
+        icon="fas fa-edit"
+        @click="handleClickUpdateScope"
+        :disabled="!isInit"
+      >update scope</el-button>
     </el-row>
   </div>
 </template>
@@ -48,6 +55,18 @@ export default {
     };
   },
   methods: {
+    async handleClickUpdateScope() {
+      const option = new window.gapi.auth2.SigninOptionsBuilder();
+      option.setScope("email https://www.googleapis.com/auth/drive");
+      const googleUser = this.$gAuth.GoogleAuth.currentUser.get();
+      try {
+        await googleUser.grant(option);
+        console.log("success");
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
     handleClickLogin() {
       this.$gAuth
         .getAuthCode()
@@ -57,43 +76,35 @@ export default {
         })
         .catch(error => {
           //on fail do something
-          console.error(error);
         });
     },
 
-    handleClickSignIn() {
-      this.$gAuth
-        .signIn()
-        .then(GoogleUser => {
-          //on success do something
-          console.log("GoogleUser", GoogleUser);
-          console.log("getId", GoogleUser.getId());
-          console.log("getBasicProfile", GoogleUser.getBasicProfile());
-          console.log("getAuthResponse", GoogleUser.getAuthResponse());
-          console.log(
-            "getAuthResponse",
-            this.$gAuth.GoogleAuth.currentUser.get().getAuthResponse()
-          );
-          this.isSignIn = this.$gAuth.isAuthorized;
-        })
-        .catch(error => {
-          //on fail do something
-          console.error(error);
-        });
+    async handleClickSignIn() {
+      try {
+        const googleUser = await this.$gAuth.signIn();
+        console.log("googleUser", googleUser);
+        console.log("getId", googleUser.getId());
+        console.log("getBasicProfile", googleUser.getBasicProfile());
+        console.log("getAuthResponse", googleUser.getAuthResponse());
+        console.log(
+          "getAuthResponse",
+          this.$gAuth.GoogleAuth.currentUser.get().getAuthResponse()
+        );
+        this.isSignIn = this.$gAuth.isAuthorized;
+      } catch (error) {
+        //on fail do something
+        console.error(error);
+      }
     },
 
-    handleClickSignOut() {
-      this.$gAuth
-        .signOut()
-        .then(() => {
-          //on success do something
-          this.isSignIn = this.$gAuth.isAuthorized;
-          console.log("isSignIn", this.$gAuth.isAuthorized);
-        })
-        .catch(error => {
-          //on fail do something
-          console.error(error);
-        });
+    async handleClickSignOut() {
+      try {
+        await this.$gAuth.signOut();
+        this.isSignIn = this.$gAuth.isAuthorized;
+        console.log("isSignIn", this.$gAuth.isAuthorized);
+      } catch (error) {
+        console.error(error);
+      }
     },
 
     handleClickDisconnect() {
