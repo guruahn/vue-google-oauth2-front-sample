@@ -1,5 +1,6 @@
 # vue-google-oauth2-front-sample
 > Sample project for [vue-google-oauth2](https://github.com/guruahn/vue-google-oauth2) plugin.
+> [Demo](https://stupefied-darwin-da9533.netlify.app/)
 ## Project setup
 
 ### 1. install
