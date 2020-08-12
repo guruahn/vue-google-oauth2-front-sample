@@ -46,12 +46,12 @@
 export default {
   name: "HelloWorld",
   props: {
-    msg: String
+    msg: String,
   },
   data() {
     return {
       isInit: false,
-      isSignIn: false
+      isSignIn: false,
     };
   },
   methods: {
@@ -70,11 +70,11 @@ export default {
     handleClickLogin() {
       this.$gAuth
         .getAuthCode()
-        .then(authCode => {
+        .then((authCode) => {
           //on success
           console.log("authCode", authCode);
         })
-        .catch(error => {
+        .catch((error) => {
           //on fail do something
         });
     },
@@ -82,6 +82,9 @@ export default {
     async handleClickSignIn() {
       try {
         const googleUser = await this.$gAuth.signIn();
+        if (!googleUser) {
+          return null;
+        }
         console.log("googleUser", googleUser);
         console.log("getId", googleUser.getId());
         console.log("getBasicProfile", googleUser.getBasicProfile());
@@ -94,6 +97,7 @@ export default {
       } catch (error) {
         //on fail do something
         console.error(error);
+        return null;
       }
     },
 
@@ -109,17 +113,17 @@ export default {
 
     handleClickDisconnect() {
       window.location.href = `https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=${window.location.href}`;
-    }
+    },
   },
 
   created() {
     let that = this;
-    let checkGauthLoad = setInterval(function() {
+    let checkGauthLoad = setInterval(function () {
       that.isInit = that.$gAuth.isInit;
       that.isSignIn = that.$gAuth.isAuthorized;
       if (that.isInit) clearInterval(checkGauthLoad);
     }, 1000);
-  }
+  },
 };
 </script>
 
