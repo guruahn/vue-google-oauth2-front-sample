@@ -118,6 +118,7 @@ export default {
 
   created() {
     let that = this;
+console.log('that.$gAuth', that.$gAuth)
     let checkGauthLoad = setInterval(function () {
       that.isInit = that.$gAuth.isInit;
       that.isSignIn = that.$gAuth.isAuthorized;
